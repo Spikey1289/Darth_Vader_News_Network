@@ -1,0 +1,27 @@
+*
+head, h1 {
+    color: rgb(24, 24, 24);
+    padding-left: 150px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 50px
+}
+
+p {
+    text-indent: 5%;
+    font-size: 22px;
+padding-left: 300px;
+padding-right: 300px;
+margin-bottom: 50px;
+}
+
+button {
+    margin-bottom: 40px;
+    padding-right: 200px;
+    padding-left: 200px;
+    margin-left: 500px;
+}
+
+body {
+    background-image: url("cocktail.jpg");
+}
