@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Icon sheet for the search bar -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./assets/css/styles.css">
+        <title>Cocktail Recipes</title>
+    </head>
 
-<head>
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <h1>How to make your favorite cocktail</h1>
-</head>
-<body>
-    <img id="img1" src="./assets/images/cocktail.jpg">
+    <body>
+        <header>
+            <h1>How to Make Cocktails - Ingredients and Recipes</h1>
+        </header>
+        
+        <!-- Hero Banner -->
+        <div class="hero-image">
+            <img id="img1" src="./assets/images/cocktail.jpg">
+        </div>
 
-    <div>
 
-    <button>Make cocktail</button>
+        <main>
+            <!-- Instructions Section -->
+            <section>
+                <p>Type the name of the cocktail you are looking for into the search bar. Click the search button next to it. Underneath the "Recipes and Ingredients" header, the way to make your cocktail will appear!</p>
+            </section>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.
-    </p>
+            <!-- Search Bar -->
+            <form class="search-cocktail" action="action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpaLorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.</p>
+            <!-- Recipes and Ingredients Section -->
+            <section>
+                <h2>Recipes and Ingredients</h2>
+                <div id="cocktail-recipe"></div>
+            </section>
 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio deleniti esse ex, consequuntur illum harum labore dolor sed omnis itaque voluptatibus nobis voluptates doloremque minus, repellat praesentium aut velit culpa.</p>
-</div>
-</body>
+        </main>
+        <script src="./assets/js/scripts.js"></script>
+    </body>
 </html>
 
