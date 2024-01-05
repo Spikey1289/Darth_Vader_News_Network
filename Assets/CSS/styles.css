@@ -1,10 +1,15 @@
 *
 head, h1 {
     color: rgb(24, 24, 24);
-    padding-left: 150px;
+    padding-left: 225px;
     font-weight: bold;
     font-style: italic;
-    font-size: 50px
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+}
+
+body {
+    background-color: rgb(242, 108, 108);
 }
 
 p {
@@ -15,13 +20,32 @@ padding-right: 300px;
 margin-bottom: 50px;
 }
 
-button {
-    margin-bottom: 40px;
-    padding-right: 200px;
-    padding-left: 200px;
-    margin-left: 500px;
+#cocktails {
+    margin-left: 10px;
+    padding-left: 50px;
+    width: 10%;
+    height: 40px;
+    border-radius: 12px;
+    justify-content: center;
 }
 
-body {
+#tail {
+    margin-left: 225px;
+    border-radius: 8%;
+    cursor: pointer;
+    width: 50px;
+    font-size: 25px;
+}
+
+.cocktail-recipe {
+    margin-left: 225px;
+    font-size: larger;
+}
+
+#img1 {
+    width: 100%;
     background-image: url("cocktail.jpg");
+    height: 600px;
+    opacity: 100%;
+    border-radius: 6px;
 }
