@@ -1,3 +1,5 @@
+var recipeEl = document.querySelector('#cocktail-recipe');
+var createParagraph = document.createElement('p');
 //placeholder for the voice API call 
 var voiceApiCall = 'https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=Hello,%20world!'
 
@@ -6,6 +8,7 @@ var drinkApiCall = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 //list to store drinks in.
 
+var globalDrinkList = [];
 
 //fetch chain
 fetch(drinkApiCall)
@@ -13,7 +16,9 @@ fetch(drinkApiCall)
         return result.json();
     })
     .then(genDrinksList)
-    .then(addDrinks);
+    .then(addDrinks)
+    .then(console.log(globalDrinkList));
+// .then(addIngredients(globalDrinkList[0]));
 
 //function returns 25 drink objects when called
 function genDrinksList(drinkData) {
@@ -86,7 +91,9 @@ function genDrinksList(drinkData) {
         }
     }
 
-    // console.log(drinkList);
+
+    globalDrinkList = drinkList;
+    // console.log(globalDrinkList);
     //returns the list of drink objects
     return drinkList;
 }
@@ -94,13 +101,23 @@ function genDrinksList(drinkData) {
 //adds the options to the select element
 function addDrinks(drinkList) {
 
-    var selectEl = document.querySelectorAll('#cocktails option');
+    var selectOptionsEl = document.querySelectorAll('#cocktails option');
 
-    for (var i=0; i < selectEl.length; i++){
-        selectEl[i].text = drinkList[i].drinkName;
+    for (var i = 0; i < selectOptionsEl.length; i++) {
+        selectOptionsEl[i].text = drinkList[i].drinkName;
     }
 }
 
+function addIngredients(drinkData) {
+    for (i = 0; i < drinkData.drinkIngredients.length; i++) {
 
+    }
 
-// addDrinks(fetchDrinks());
+    recipeEl.innerHTML = ""
+    createParagraph.innerText =
+        "Drink: " + drinkData.drinkName + "\n\n" +
+        "Category: " + drinkData.drinkCategory + "\n\n" +
+        "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
+        "Ingredients and Measurments: ";
+
+}
