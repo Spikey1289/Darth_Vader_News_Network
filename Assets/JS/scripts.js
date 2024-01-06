@@ -95,7 +95,6 @@ function genDrinksList(drinkData) {
 function addDrinks(drinkList) {
 
     var selectEl = document.querySelectorAll('#cocktails option');
-    console.log(selectEl);
 
     for (var i=0; i < selectEl.length; i++){
         selectEl[i].text = drinkList[i].drinkName;
