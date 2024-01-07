@@ -1,10 +1,12 @@
 var recipeEl = document.querySelector('#cocktail-recipe');
 var createParagraph = document.createElement('p');
-var createButton = document.createElement('button');
+var createAudio = document.createElement('audio');
+var createAudioSrc = document.createElement('source');
+
 var selectEl = document.getElementById("cocktails")
 
 //placeholder for the voice API call 
-var voiceApiCall = 'https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=Hello,%20world!'
+var voiceApiCall = 'https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src='
 
 //placeholder for the drink API call
 var drinkApiCall = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -73,7 +75,7 @@ function genDrinksList(drinkData) {
 
             const ingredientObject = {
                 ingredient: ingredients[i],
-                measurement: measurements[i],
+                measurement: measurements[i]
             };
 
             ingredientObjects.push(ingredientObject);
@@ -129,12 +131,21 @@ function addIngredients(drinkData) {
     "Ingredients and Measurments: \n" + ingredientList + "\n" +
     "Instructions: \n" + drinkData.drinkInstructions;
 
+    TTSsrc = "https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=" + instructionsText;
+
     recipeEl.innerHTML = "";
 
     createParagraph.innerText = instructionsText;
 
     recipeEl.appendChild(createParagraph);
+    recipeEl.appendChild(createAudio);
 
+    createAudio.setAttribute("id", "audio");
+    createAudio.setAttribute("controls", "controls");
+    createAudioSrc.setAttribute("id", "audioSrc");
+    document.getElementById('audio').load();
+    createAudioSrc.setAttribute("src", TTSsrc);
+    createAudio.appendChild(createAudioSrc);
 }
 
 selectEl.addEventListener("change", function () {
