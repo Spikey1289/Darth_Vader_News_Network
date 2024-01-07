@@ -1,5 +1,7 @@
 var recipeEl = document.querySelector('#cocktail-recipe');
 var createParagraph = document.createElement('p');
+var selectEl = document.getElementById("cocktails")
+
 //placeholder for the voice API call 
 var voiceApiCall = 'https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=Hello,%20world!'
 
@@ -99,7 +101,7 @@ function addDrinks(drinkList) {
     var selectOptionsEl = document.querySelectorAll('#cocktails option');
 
     for (var i = 0; i < selectOptionsEl.length; i++) {
-        selectOptionsEl[i].value = drinkList[i].drinkName;
+        // selectOptionsEl[i].value = drinkList[i].drinkName;
         selectOptionsEl[i].text = drinkList[i].drinkName;
     }
 
@@ -108,8 +110,8 @@ function addDrinks(drinkList) {
 
 
 function addIngredients(drinkData) {
-    console.log(drinkData);
     var ingredientList = "";
+
     for (i = 0; i < drinkData.drinkIngredients.length; i++) {
         if (drinkData.drinkIngredients[i].measurement !== null){
             ingredientList += drinkData.drinkIngredients[i].ingredient + " - " + drinkData.drinkIngredients[i].measurement + "\n";
@@ -119,7 +121,8 @@ function addIngredients(drinkData) {
         
     }
 
-    recipeEl.innerHTML = ""
+    recipeEl.innerHTML = "";
+
     createParagraph.innerText =
         "\nDrink: " + drinkData.drinkName + "\n\n" +
         "Category: " + drinkData.drinkCategory + "\n\n" +
@@ -129,3 +132,7 @@ function addIngredients(drinkData) {
     recipeEl.appendChild(createParagraph);
 
 }
+
+selectEl.addEventListener("change", function () {
+    addIngredients(drinkList[selectEl.value-1]);
+});
