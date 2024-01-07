@@ -8,21 +8,20 @@ var drinkApiCall = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 //list to store drinks in.
 
-var globalDrinkList = [];
+var drinkList = [];
 
 //fetch chain
 fetch(drinkApiCall)
-    .then(function (result) {
-        return result.json();
-    })
-    .then(genDrinksList)
-    .then(addDrinks)
-    .then(console.log(globalDrinkList));
-// .then(addIngredients(globalDrinkList[0]));
+.then(function (result) {
+    return result.json();
+})
+.then(genDrinksList)
+.then(addDrinks)
+
 
 //function returns 25 drink objects when called
 function genDrinksList(drinkData) {
-    var drinkList = [];
+    // var drinkList = [];
 
     //logic to grab the 15 ingredients from the data provided
     function getIngredients(drink) {
@@ -91,10 +90,6 @@ function genDrinksList(drinkData) {
         }
     }
 
-
-    globalDrinkList = drinkList;
-    // console.log(globalDrinkList);
-    //returns the list of drink objects
     return drinkList;
 }
 
@@ -104,20 +99,33 @@ function addDrinks(drinkList) {
     var selectOptionsEl = document.querySelectorAll('#cocktails option');
 
     for (var i = 0; i < selectOptionsEl.length; i++) {
+        selectOptionsEl[i].value = drinkList[i].drinkName;
         selectOptionsEl[i].text = drinkList[i].drinkName;
     }
+
+    addIngredients(drinkList[0]);
 }
 
-function addIngredients(drinkData) {
-    for (i = 0; i < drinkData.drinkIngredients.length; i++) {
 
+function addIngredients(drinkData) {
+    console.log(drinkData);
+    var ingredientList = "";
+    for (i = 0; i < drinkData.drinkIngredients.length; i++) {
+        if (drinkData.drinkIngredients[i].measurement !== null){
+            ingredientList += drinkData.drinkIngredients[i].ingredient + " - " + drinkData.drinkIngredients[i].measurement + "\n";
+        } else {
+            ingredientList += drinkData.drinkIngredients[i].ingredient + "\n";
+        }
+        
     }
 
     recipeEl.innerHTML = ""
     createParagraph.innerText =
-        "Drink: " + drinkData.drinkName + "\n\n" +
+        "\nDrink: " + drinkData.drinkName + "\n\n" +
         "Category: " + drinkData.drinkCategory + "\n\n" +
         "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
-        "Ingredients and Measurments: ";
+        "Ingredients and Measurments: \n" + ingredientList + "\n" + 
+        "Instructions: \n" + drinkData.drinkInstructions  
+    recipeEl.appendChild(createParagraph);
 
 }
