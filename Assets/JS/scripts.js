@@ -1,5 +1,6 @@
 var recipeEl = document.querySelector('#cocktail-recipe');
 var createParagraph = document.createElement('p');
+var createButton = document.createElement('button');
 var selectEl = document.getElementById("cocktails")
 
 //placeholder for the voice API call 
@@ -121,14 +122,17 @@ function addIngredients(drinkData) {
         
     }
 
+    var instructionsText =
+    "\nDrink: " + drinkData.drinkName + "\n\n" +
+    "Category: " + drinkData.drinkCategory + "\n\n" +
+    "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
+    "Ingredients and Measurments: \n" + ingredientList + "\n" +
+    "Instructions: \n" + drinkData.drinkInstructions;
+
     recipeEl.innerHTML = "";
 
-    createParagraph.innerText =
-        "\nDrink: " + drinkData.drinkName + "\n\n" +
-        "Category: " + drinkData.drinkCategory + "\n\n" +
-        "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
-        "Ingredients and Measurments: \n" + ingredientList + "\n" + 
-        "Instructions: \n" + drinkData.drinkInstructions  
+    createParagraph.innerText = instructionsText;
+
     recipeEl.appendChild(createParagraph);
 
 }
