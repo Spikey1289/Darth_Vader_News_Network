@@ -115,16 +115,12 @@ function addDrinks(drinkList) {
 function addIngredients(drinkData) {
     var ingredientList = "";
 
-    var TTSsrc = "https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=" + instructionsText;
-
-
     for (i = 0; i < drinkData.drinkIngredients.length; i++) {
         if (drinkData.drinkIngredients[i].measurement !== null){
             ingredientList += drinkData.drinkIngredients[i].ingredient + " - " + drinkData.drinkIngredients[i].measurement + "\n";
         } else {
             ingredientList += drinkData.drinkIngredients[i].ingredient + "\n";
         }
-        
     }
 
     var instructionsText =
@@ -134,6 +130,7 @@ function addIngredients(drinkData) {
     "Ingredients and Measurments: \n" + ingredientList + "\n" +
     "Instructions: \n" + drinkData.drinkInstructions;
 
+    var TTSsrc = "https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=" + instructionsText;
 
     recipeEl.innerHTML = "";
 
