@@ -15,6 +15,12 @@ var drinkApiCall = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 var drinkList = [];
 
+if (localStorage.getItem('lastPicked') !== null) {
+    var initialValue = parseInt(localStorage.getItem('lastPicked')) - 1;
+} else {
+    var initialValue = 0;
+}
+
 //fetch chain
 fetch(drinkApiCall)
 .then(function (result) {
@@ -104,11 +110,14 @@ function addDrinks(drinkList) {
     var selectOptionsEl = document.querySelectorAll('#cocktails option');
 
     for (var i = 0; i < selectOptionsEl.length; i++) {
-        // selectOptionsEl[i].value = drinkList[i].drinkName;
         selectOptionsEl[i].text = drinkList[i].drinkName;
+
+        if (i === initialValue){
+            selectOptionsEl[i].setAttribute('selected', 'true');
+        }
     }
 
-    addIngredients(drinkList[0]);
+    addIngredients(drinkList[initialValue]);
 }
 
 
@@ -149,4 +158,6 @@ function addIngredients(drinkData) {
 
 selectEl.addEventListener("change", function () {
     addIngredients(drinkList[selectEl.value-1]);
+    localStorage.setItem("lastPicked", selectEl.value);
+    initialValue = parseInt(localStorage.getItem('lastPicked'));
 });
