@@ -1,9 +1,12 @@
 var recipeEl = document.querySelector('#cocktail-recipe');
 var createParagraph = document.createElement('p');
+var createAudio = document.createElement('audio');
+var createAudioSrc = document.createElement('source');
+
 var selectEl = document.getElementById("cocktails")
 
 //placeholder for the voice API call 
-var voiceApiCall = 'https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=Hello,%20world!'
+var voiceApiCall = 'https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src='
 
 //placeholder for the drink API call
 var drinkApiCall = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -11,6 +14,12 @@ var drinkApiCall = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 //list to store drinks in.
 
 var drinkList = [];
+
+if (localStorage.getItem('lastPicked') !== null) {
+    var initialValue = parseInt(localStorage.getItem('lastPicked')) - 1;
+} else {
+    var initialValue = 0;
+}
 
 //fetch chain
 fetch(drinkApiCall)
@@ -72,7 +81,7 @@ function genDrinksList(drinkData) {
 
             const ingredientObject = {
                 ingredient: ingredients[i],
-                measurement: measurements[i],
+                measurement: measurements[i]
             };
 
             ingredientObjects.push(ingredientObject);
@@ -101,11 +110,14 @@ function addDrinks(drinkList) {
     var selectOptionsEl = document.querySelectorAll('#cocktails option');
 
     for (var i = 0; i < selectOptionsEl.length; i++) {
-        // selectOptionsEl[i].value = drinkList[i].drinkName;
         selectOptionsEl[i].text = drinkList[i].drinkName;
+
+        if (i === initialValue){
+            selectOptionsEl[i].setAttribute('selected', 'true');
+        }
     }
 
-    addIngredients(drinkList[0]);
+    addIngredients(drinkList[initialValue]);
 }
 
 
@@ -118,21 +130,34 @@ function addIngredients(drinkData) {
         } else {
             ingredientList += drinkData.drinkIngredients[i].ingredient + "\n";
         }
-        
     }
+
+    var instructionsText =
+    "\nDrink: " + drinkData.drinkName + "\n\n" +
+    "Category: " + drinkData.drinkCategory + "\n\n" +
+    "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
+    "Ingredients and Measurments: \n" + ingredientList + "\n" +
+    "Instructions: \n" + drinkData.drinkInstructions;
+
+    var TTSsrc = "https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=" + instructionsText;
 
     recipeEl.innerHTML = "";
 
-    createParagraph.innerText =
-        "\nDrink: " + drinkData.drinkName + "\n\n" +
-        "Category: " + drinkData.drinkCategory + "\n\n" +
-        "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
-        "Ingredients and Measurments: \n" + ingredientList + "\n" + 
-        "Instructions: \n" + drinkData.drinkInstructions  
-    recipeEl.appendChild(createParagraph);
+    createParagraph.innerText = instructionsText;
 
+    recipeEl.appendChild(createParagraph);
+    recipeEl.appendChild(createAudio);
+
+    createAudio.setAttribute("id", "audio");
+    createAudio.setAttribute("controls", "controls");
+    createAudioSrc.setAttribute("id", "audioSrc");
+    document.getElementById('audio').load();
+    createAudioSrc.setAttribute("src", TTSsrc);
+    createAudio.appendChild(createAudioSrc);
 }
 
 selectEl.addEventListener("change", function () {
     addIngredients(drinkList[selectEl.value-1]);
+    localStorage.setItem("lastPicked", selectEl.value);
+    initialValue = parseInt(localStorage.getItem('lastPicked'));
 });
