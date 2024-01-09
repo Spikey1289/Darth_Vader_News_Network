@@ -65,7 +65,7 @@ function genDrinksList(drinkData) {
         return measurements;
     }
 
-    //logic to place both the ingredients and the corrosponding measuments in an object together
+    //logic to place both the ingredients and the corresponding measurements in an object together
     function createIngredientData(drink) {
         const ingredients = getIngredients(drink);
         const measurements = getMeasurements(drink);
@@ -97,7 +97,7 @@ function genDrinksList(drinkData) {
             drinkInstructions: drinkCall.strInstructions
         }
     }
-    //returns glogbal variable to next item in fetch chain
+    //returns global variable to next item in fetch chain
     return drinkList;
 }
 
@@ -143,6 +143,17 @@ function addIngredients(drinkData) {
     //variable returns an mp3 file with the instructions when called
     var TTSsrc = "https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=" + instructionsText;
 
+    //small fix to make the AT&T actually read in the TTS vs cutting off earlier
+    if (drinkData.drinkName === "AT&T") {
+        TTSsrc =
+            "https://api.voicerss.org/?key=68c1383670f94020b6398d1b0e3a5fa8&hl=en-us&src=" + 
+
+            "\nDrink: " + "A.T. and T." + "\n\n" +
+            "Category: " + drinkData.drinkCategory + "\n\n" +
+            "Type of Glass: " + drinkData.drinkGlass + "\n\n" +
+            "Ingredients and Measurements: \n" + ingredientList + "\n" +
+            "Instructions: \n" + drinkData.drinkInstructions;
+    }
     //resets the ingredients and instructions before generating new ones
     recipeEl.innerHTML = "";
 
